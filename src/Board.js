@@ -79,12 +79,33 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
+      var boardArr = this.rows();
+      var found1 = 0;
+      for(var i = 0; i < boardArr[rowIndex].length; i++) {
+        if(boardArr[rowIndex][i]) {
+          found1++;
+        }
+      }
+      if(found1 > 1) {
+        return true;
+      }
       return false; // fixme
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+
+      var boardArr = this.rows();
+      var n = boardArr.length - 1;
+      var found = false;
+      while(n >= 0) {
+        found = this.hasRowConflictAt(n);
+        if(found) {
+          return found;
+        }
+        n--;
+      }
+       return found; // fixme
     },
 
 
@@ -94,12 +115,33 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+      var boardArr = this.rows();
+      var found1 = 0;
+      for(var i = 0; i < boardArr.length; i++) {
+        if(boardArr[i][colIndex]) {
+          found1++;
+        }
+      }
+      if(found1 > 1) {
+        return true;
+      }
       return false; // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+
+      var boardArr = this.rows();
+      var n = boardArr.length - 1;
+      var found = false;
+      while(n >= 0) {
+        found = this.hasColConflictAt(n);
+        if(found) {
+          return found;
+        }
+        n--;
+      }
+       return found; // fixme
     },
 
 
@@ -109,6 +151,29 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      var boardArr = this.rows();
+      var n = boardArr.length - 1;
+      var index = majorDiagonalColumnIndexAtFirstRow;
+      var found = 0;
+      if(index === (n)){
+        return false;
+      }else{
+        for(var i = 0; i <= n; i++){
+          for(var j = index; j <= n; j++){
+            console.log(boardArr[i][j]);
+            if(boardArr[i][j]){
+              found++;
+            }
+            i++;
+            if(i > n){
+              break;
+            }
+          }
+        }
+      }
+      if(found > 1){
+        return true;
+      }
       return false; // fixme
     },
 
