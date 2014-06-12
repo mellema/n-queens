@@ -215,6 +215,16 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      var boardArr = this.rows();
+      var n = boardArr.length + 1;
+      var found = false;
+      while(n >= 0) {
+        found = this.hasMinorDiagonalConflictAt(n);
+        if(found) {
+          return found;
+        }
+        n--;
+      }
       return false; // fixme
     }
 
